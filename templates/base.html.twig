@@ -11,6 +11,8 @@
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
 
         {% block javascripts %}
+            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
