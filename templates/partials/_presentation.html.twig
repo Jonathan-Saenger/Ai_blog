@@ -1,0 +1,219 @@
+<section class="presentation" id="presentation">
+    <h2 class="section-title neon-text">Développeur à l'ère de l'IA : S'adapter, Innover, Sécuriser</h2>
+    <p class="section-intro">L'intelligence artificielle révolutionne le développement web. Loin d'être une menace, elle offre aux développeurs une opportunité unique d'optimiser leur code, d'accélérer le processus de création et d'offrir aux professionnels de nouveaux outils pour répondre aux mutations de leur marché. Mais ces avancées soulèvent aussi un défi majeur : la cybersécurité.</p>
+
+    <div class="presentation-content">
+        <div class="text-content">
+            <h3>Jonathan Saenger, développeur web à l'ère de l'IA</h3>
+            <p>Je suis Jonathan Saenger, développeur web passionné par l'évolution technologique. Je suis heureux de vous partager de nouvelles pratiques de développement à l'ère de l'intelligence artificielle. Développeur web fullstack, j'étudie actuellement le Cloud Computing et me forme sur l'Intelligence Artificielle. Tout cela me permet d'explorer comment notre façon de travailler est en pleine transformation avec la sécurité, plus que jamais, placé au coeur de notre priorité.</p>
+            <p>À travers ce blog, je partage ma vision d'un développement web moderne où l'IA devient un allié puissant pour doper notre apprentissage, optimiser nos processus de développement et stimuler notre créativité. Que vous soyez un professionnel et/ou passionné de tech, j'essaierais de vous partager autant de ressources utiles pour naviguer dans cette ère numérique en pleine transformation.</p>
+            <a href="#latest-articles" class="read-more">Découvrir mes articles</a>
+        </div>
+        <div class="image-content">
+            <div class="portrait-container">
+                <img src="{{ asset('images/portrait.png') }}" alt="Portrait de Jonathan Saenger" class="portrait-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.presentation {
+    padding: 3rem 5%;
+    max-width: 1440px;
+    margin: 2rem auto;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.4));
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(111, 66, 193, 0.1);
+    overflow: hidden;
+}
+
+/* Pattern de fond subtil */
+.presentation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 80% 60%, rgba(111, 66, 193, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 40% 80%, rgba(232, 62, 140, 0.03) 0%, transparent 20%);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, #007bff, #6f42c1, #e83e8c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-intro {
+    color: #495057;
+    max-width: 80%;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.presentation-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(111, 66, 193, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Bordure avec dégradé subtil */
+.presentation-content::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.2), rgba(111, 66, 193, 0.2), rgba(232, 62, 140, 0.2));
+    border-radius: 14px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.presentation-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+}
+
+.presentation-content:hover::after {
+    opacity: 1;
+}
+
+.text-content {
+    padding: 1rem;
+    position: relative;
+}
+
+.image-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.portrait-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.15);
+}
+
+.portrait-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.5s ease;
+    object-fit: cover;
+}
+
+.portrait-container:hover .portrait-image {
+    transform: scale(1.05);
+}
+
+.text-content h3 {
+    font-size: 1.8rem;
+    margin: 1.5rem 0;
+    color: #495057;
+    line-height: 1.4;
+    background: linear-gradient(45deg, #007bff, #6f42c1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.text-content p {
+    color: #6c757d;
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(45deg, #007bff, #6f42c1);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s, transform 0.3s;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.read-more::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #0069d9, #5a36a0);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.read-more:hover::before {
+    width: 100%;
+}
+
+.read-more:hover {
+    transform: translateX(5px);
+}
+
+@media screen and (max-width: 768px) {
+    .section-intro {
+        max-width: 100%;
+    }
+
+    .presentation-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .image-content {
+        order: -1;
+    }
+
+    .portrait-image {
+        max-width: 100%;
+    }
+
+    .presentation {
+        padding: 2rem 5%;
+        margin: 1rem auto;
+    }
+}
+</style>
