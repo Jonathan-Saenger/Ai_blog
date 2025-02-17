@@ -1,0 +1,241 @@
+<header>
+    <nav>
+        <div class="logo">AI://Dev.Sec</div>
+        <div class="nav-links">
+            <a href="#">Accueil</a>
+            <a href="#">Articles</a>
+            <a href="#">Présentation</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+</header>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-nav">
+    <a href="#">Accueil</a>
+    <a href="#">Articles</a>
+    <a href="#">Présentation</a>
+    <a href="#">Contact</a>
+</div>
+
+
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    transition: 0.3s;
+}
+
+header {
+    background: #f8f9fa;
+    padding: 1.5rem 5%;
+    border-bottom: 2px solid #dee2e6;
+    position: relative;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 2rem;
+    background: linear-gradient(45deg, #007bff, #6f42c1, #e83e8c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    position: relative;
+    background-size: 200% auto;
+}
+
+.logo:hover {
+    background-position: right center;
+    transform: scale(1.02);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 123, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.logo:hover::before {
+    background: rgba(111, 66, 193, 0.1);
+    border-color: rgba(111, 66, 193, 0.2);
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #495057;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background: #343a40;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 998;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 70%;
+    max-width: 300px;
+    background: #f8f9fa;
+    padding: 2rem;
+    transition: 0.5s ease;
+    z-index: 1001;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mobile-nav.active {
+    right: 0;
+}
+
+.mobile-nav a {
+    color: #343a40;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.mobile-nav a:hover {
+    background: #e9ecef;
+    color: #007bff;
+}
+
+.burger.active .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.active .line2 {
+    opacity: 0;
+}
+
+.burger.active .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media screen and (max-width: 768px) {
+    .burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .nav-links {
+        display: none;
+    }
+}
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.burger');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileOverlay = document.querySelector('.mobile-overlay');
+    const body = document.body;
+
+    const toggleMenu = () => {
+        burger.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    };
+
+    const closeMenu = () => {
+        burger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        body.classList.remove('menu-open');
+    };
+
+    burger.addEventListener('click', toggleMenu);
+    mobileOverlay.addEventListener('click', closeMenu);
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('scroll', (e) => {
+        if (body.classList.contains('menu-open')) {
+            e.preventDefault();
+            window.scrollTo(0, 0);
+        }
+    });
+});
+
+</script>
