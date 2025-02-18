@@ -1,39 +1,270 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Administration des Articles{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+<section class="admin-section">
+    <h1 class="admin-title neon-text">Gestion des Articles</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>CreatAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.content }}</td>
-                <td>{{ article.creatAt ? article.creatAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="admin-card">
+        <div class="admin-actions">
+            <a href="{{ path('app_admin_article_new') }}" class="admin-button create-button">
+                <i class="fas fa-plus"></i> Créer un article
+            </a>
+        </div>
 
-    <a href="{{ path('app_admin_article_new') }}">Create new</a>
+        <div class="table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Contenu</th>
+                        <th>Date de création</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.id }}</td>
+                        <td class="title-cell">{{ article.title }}</td>
+                        <td class="content-cell">{{ article.content|striptags|slice(0, 100) }}{% if article.content|length > 100 %}...{% endif %}</td>
+                        <td>{{ article.createdAt ? article.createdAt|date('d/m/Y à H:i') : '' }}</td>
+                        <td class="actions-cell">
+                            <a href="{{ path('app_admin_article_show', {'id': article.id}) }}" class="action-button view-button" title="Voir">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}" class="action-button edit-button" title="Modifier">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="no-records">Aucun article trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<style>
+.admin-section {
+    padding: 2rem 5%;
+    max-width: 1440px;
+    margin: 2rem auto;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.4));
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(111, 66, 193, 0.1);
+    overflow: hidden;
+}
+
+.admin-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 80% 60%, rgba(111, 66, 193, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 40% 80%, rgba(232, 62, 140, 0.03) 0%, transparent 20%);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.admin-title {
+    font-weight: 800;
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, #007bff, #6f42c1, #e83e8c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(111, 66, 193, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+}
+
+.admin-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.admin-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(45deg, #007bff, #6f42c1);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s, transform 0.3s;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.admin-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #0069d9, #5a36a0);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.admin-button:hover::before {
+    width: 100%;
+}
+
+.admin-button:hover {
+    transform: translateY(-3px);
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-table thead tr {
+    background: linear-gradient(45deg, rgba(0, 123, 255, 0.1), rgba(111, 66, 193, 0.1));
+    border-bottom: 2px solid rgba(111, 66, 193, 0.2);
+}
+
+.admin-table th {
+    padding: 1rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    vertical-align: middle;
+}
+
+.admin-table tbody tr {
+    transition: background-color 0.3s;
+}
+
+.admin-table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.title-cell {
+    font-weight: 500;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content-cell {
+    max-width: 400px;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    color: white;
+}
+
+.view-button {
+    background: linear-gradient(45deg, #17a2b8, #20c997);
+}
+
+.edit-button {
+    background: linear-gradient(45deg, #fd7e14, #ffc107);
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-records {
+    text-align: center;
+    color: #6c757d;
+    padding: 2rem;
+    font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+    .admin-section {
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .admin-card {
+        padding: 1rem;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+    }
+
+    .admin-actions {
+        justify-content: center;
+    }
+
+    .title-cell, .content-cell {
+        max-width: 150px;
+    }
+
+    .actions-cell {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+</style>
 {% endblock %}

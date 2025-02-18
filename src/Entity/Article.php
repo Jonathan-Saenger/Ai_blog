@@ -20,9 +20,6 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $creatAt = null;
-
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
@@ -55,18 +52,6 @@ class Article
     public function setContent(string $content): static
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getCreatAt(): ?\DateTimeInterface
-    {
-        return $this->creatAt;
-    }
-
-    public function setCreatAt(\DateTimeInterface $creatAt): static
-    {
-        $this->creatAt = $creatAt;
 
         return $this;
     }

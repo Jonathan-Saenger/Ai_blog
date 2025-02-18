@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,13 +14,6 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('creatAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 
