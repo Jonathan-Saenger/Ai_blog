@@ -38,6 +38,9 @@
                             <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}" class="action-button edit-button" title="Modifier">
                                 <i class="fas fa-pen"></i>
                             </a>
+                            <a href="{{ path('app_admin_article_delete', {'id': article.id}) }}" class="action-button delete-button" title="Supprimer">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 {% else %}
@@ -230,6 +233,10 @@
 .action-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button {
+    background: linear-gradient(45deg, #dc3545, #ff073a);
 }
 
 .no-records {
