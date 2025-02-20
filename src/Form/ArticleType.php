@@ -6,6 +6,7 @@ use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ArticleType extends AbstractType
 {
@@ -13,7 +14,9 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content')
+            ->add('content', CKEditorType::class, [
+                'config' => ['toolbar' => 'full'],
+            ])
         ;
     }
 

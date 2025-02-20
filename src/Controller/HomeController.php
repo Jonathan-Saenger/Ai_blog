@@ -14,7 +14,7 @@ final class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC']),
+            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC'], 3),
         ]);
     }
 }
