@@ -7,12 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class ArticleController extends AbstractController
+final class BlogController extends AbstractController
 {
-    #[Route('/article', name: 'app_article')]
+    #[Route('/blog', name: 'app_blog')]
     public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('partials/_article.html.twig', [
+        return $this->render('home/blog.html.twig', [
             'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }

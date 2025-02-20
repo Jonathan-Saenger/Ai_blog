@@ -1,7 +1,8 @@
-{# templates/blog/latest_articles.html.twig #}
+{% extends 'base.html.twig' %}
 
-{# partials/_article.html.twig #}
+{% block title %}Blog : découvrez les derniers articles sur le web, l'intelligence artificielle et le le cloud{% endblock %}
 
+{% block body %}
 <section class="latest-articles" id="latest-articles">
     <h2 class="section-title neon-text">Derniers Articles</h2>
     <p class="section-intro">Parce que la technologie évolue sans cesse et très rapidement, les articles sont régulièrement
@@ -34,9 +35,10 @@
     {% endif %}
 
     <div class="view-all-articles">
-        <a href="{{ path('app_blog') }}" class="view-all-link">
-            <span>Consulter tous les articles dans le Blog</span>
+        <a href="{{ path('app_home') }}" class="view-all-link">
+            <span>Retour à la page d'accueil</span>
             <i class="fas fa-arrow-right"></i>
         </a>
     </div>
 </section>
+{% endblock %}
