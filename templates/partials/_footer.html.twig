@@ -39,6 +39,12 @@
 
     <div class="footer-bottom">
         <p>&copy; {{ "now"|date("Y") }} AIDevSec. Tous droits réservés.</p>
+
+        {% if app. user%}
+            <a href="{{ path('app_logout') }}" class="logout-link">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">.</a>
+        {% endif %}
     </div>
 </footer>
 
