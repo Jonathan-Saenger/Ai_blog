@@ -29,17 +29,6 @@ class Article
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    /**
-     * @var Collection<int, ArticleCategory>
-     */
-    #[ORM\OneToMany(targetEntity: ArticleCategory::class, mappedBy: 'category')]
-    private Collection $articleCategories;
-
-    public function __construct()
-    {
-        $this->articleCategories = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -89,36 +78,6 @@ class Article
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ArticleCategory>
-     */
-    public function getArticleCategories(): Collection
-    {
-        return $this->articleCategories;
-    }
-
-    public function addArticleCategory(ArticleCategory $articleCategory): static
-    {
-        if (!$this->articleCategories->contains($articleCategory)) {
-            $this->articleCategories->add($articleCategory);
-            $articleCategory->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticleCategory(ArticleCategory $articleCategory): static
-    {
-        if ($this->articleCategories->removeElement($articleCategory)) {
-            // set the owning side to null (unless already changed)
-            if ($articleCategory->getCategory() === $this) {
-                $articleCategory->setCategory(null);
-            }
-        }
 
         return $this;
     }
