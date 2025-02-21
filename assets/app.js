@@ -1,6 +1,6 @@
 import './bootstrap.js';
 import './styles/app.css';
-import { Turbo } from "@hotwired/turbo";
+import * as Turbo from "@hotwired/turbo";
 
 // Active Turbo
 Turbo.start();

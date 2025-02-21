@@ -23,7 +23,7 @@
                         <div class="article-badge">{{ article.category }}</div>#}
                         <h3>{{ article.title }}</h3>
                         <p>{{ article.getContent() | striptags | slice(0, 200) }}</p>
-                        <a href="{{ path('app_home', {'id': article.id}) }}" class="read-more">Lire plus</a>
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}" class="read-more">Lire plus</a>
                         {% if app.user %}
                            <a href="{{ path('app_home', {'id': article.id}) }}" class="read-more">Modifier</a>
                         {% endif %}
