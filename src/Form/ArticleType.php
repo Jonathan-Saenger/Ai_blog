@@ -3,16 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use Ehyiah\QuillJsBundle\DTO\Fields\BlockField\AlignField;
+use App\Entity\ArticleCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Ehyiah\QuillJsBundle\Form\QuillType;
-use Ehyiah\QuillJsBundle\DTO\Fields\InlineField\BoldField;
-use Ehyiah\QuillJsBundle\DTO\Fields\InlineField\ItalicField;
-use Ehyiah\QuillJsBundle\DTO\Fields\InlineField\UnderlineField;
-use Ehyiah\QuillJsBundle\DTO\Fields\BlockField\HeaderField;
 use Ehyiah\QuillJsBundle\DTO\QuillGroup;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ArticleType extends AbstractType
 {
@@ -27,6 +24,12 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Commencez à écrire...', // Texte d'indication
                 ],
                 'quill_options' => [QuillGroup::buildWithAllFields()]
+            ])
+            ->add('category', EntityType::class, [
+                'class' => ArticleCategory::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez une catégorie',
+                'required' => true,
             ]);
     }
 
