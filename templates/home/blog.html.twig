@@ -1,20 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog : découvrez les derniers articles sur le web, l'intelligence artificielle et le le cloud{% endblock %}
+{% block title %}Blog : découvrez les derniers articles sur le web, l'intelligence artificielle et le cloud{% endblock %}
 
 {% block body %}
 <section class="latest-articles" id="latest-articles">
     <h2 class="section-title neon-text">Derniers Articles</h2>
-    <p class="section-intro">Parce que la technologie évolue sans cesse et très rapidement, les articles sont régulièrement
-        mis à jour plutôt que recréés systématiquement. Restez informé, anticipez les défis et façonnez l'avenir du web
-        en toute sécurité avec l'intelligence artificielle.</p>
+    <p class="section-intro">
+        Parce que la technologie évolue sans cesse et très rapidement, les articles sont régulièrement mis à jour
+        plutôt que recréés systématiquement. Restez informé, anticipez les défis et façonnez l'avenir du web en toute
+        sécurité avec l'intelligence artificielle.
+    </p>
+
+    <input type="text" id="search-input" placeholder="Rechercher un article..." class="search-box">
 
     {% if articles is empty %}
         <div>Chargement des articles...</div>
     {% else %}
-        <div class="articles-grid">
+        <div class="articles-grid" id="articles-container">
             {% for article in articles %}
-                <div class="article-card">
+                <div class="article-card" data-title="{{ article.title|lower }}" data-content="{{ article.content|lower }}">
                     <div class="article-image">
                         {# Implémenter VichUploaderBundle pour gérer les images #
                         <img src="{{ asset(article.image) }}" alt="{{ article.title }}">#}
@@ -40,4 +44,36 @@
         </a>
     </div>
 </section>
+
+<script>
+    document.getElementById('search-input').addEventListener('input', function () {
+        let searchQuery = this.value.toLowerCase();
+        let articles = document.querySelectorAll('.article-card');
+
+        articles.forEach(article => {
+            let title = article.dataset.title;
+            let content = article.dataset.content;
+
+            if (title.includes(searchQuery) || content.includes(searchQuery)) {
+                article.style.display = 'block';
+            } else {
+                article.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<style>
+    .search-box {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+</style>
+
 {% endblock %}
