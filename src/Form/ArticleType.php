@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +16,23 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content');
+            ->add('content')
+            ->add('category', ChoiceType::class, [
+                'choices' => [
+                    'IA' => 'IA',
+                    'Sécurité' => 'Sécurité',
+                    'Cloud' => 'CLoud',
+                    'Développement' => 'Développement',
+                    'DevOps' => 'DevOps',
+                    'BigData' => 'BigData',
+                    'Tutoriel' => 'Tutoriel'
+                ],
+            ])
+            ->add('author', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'email',
+                'placeholder' => 'Sélectionnez un auteur',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

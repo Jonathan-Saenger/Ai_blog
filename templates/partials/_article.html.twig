@@ -16,8 +16,7 @@
                         <img src="{{ asset(article.image) }}" alt="{{ article.title }}">#}
                     </div>
                     <div class="article-content">
-                        {# Implémenter les badges pour les catégories d'articles #
-                        <div class="article-badge">{{ article.category.name }}</div>#}
+                        <div class="article-badge">{{ article.category }}</div>
                         <h3>{{ article.title }}</h3>
                         <p>{{ article.getContent() | striptags | slice(0, 200) }}</p>
                         <a href="{{ path('app_article_show', {'id': article.id}) }}" class="read-more">Lire plus</a>
