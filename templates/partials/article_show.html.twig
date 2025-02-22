@@ -3,7 +3,7 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <section class="article-section">
+        <section class="article-section">
         <div class="cyber-background">
             <div class="cyber-grid"></div>
             <div class="cyber-particles"></div>
@@ -14,7 +14,21 @@
             <article class="article-card">
                 <div class="article-badge">{{ article.category }}</div>
                 <h1 class="article-title">{{ article.title }}</h1>
-                <p>Article rédigé par : {{ article.author.name }}</p>
+
+                <div class="article-metadata">
+                    <div class="author-info">
+                        <span class="author-avatar">
+                            <img src="{{ asset('/images/portrait.png') }}" alt="Photo de profil">
+                        </span>
+                        <div class="author-details">
+                            <span class="author-name">{{ article.author.name }}</span>
+                            <span class="article-date">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ article.createdAt | date('d/m/Y') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="article-content">
                     {{ article.content | raw }}
@@ -138,7 +152,6 @@
         color: #495057;
         line-height: 1.8;
         font-size: 1.1rem;
-        margin-bottom: 3rem;
     }
 
     .article-content h2 {
@@ -170,7 +183,6 @@
     }
 
     .article-footer {
-        margin-top: 3rem;
         padding-top: 2rem;
         border-top: 1px solid rgba(111, 66, 193, 0.1);
     }
@@ -217,7 +229,66 @@
 
     /* Ajustement pour l'espacement avec le titre */
     .article-title {
-        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .article-metadata {
+    margin: 1rem 0 2rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    border-radius: 12px;
+    border: 1px solid rgba(111, 66, 193, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+    .author-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .author-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(111, 66, 193, 0.2);
+        border: 2px solid rgba(111, 66, 193, 0.3);
+    }
+
+    .author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .author-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .author-name {
+        font-weight: 600;
+        color: #343a40;
+        font-size: 1.1rem;
+        background: linear-gradient(45deg, #007bff, #6f42c1);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .article-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .article-date i {
+        color: #6f42c1;
+        opacity: 0.8;
     }
 
     @keyframes grid-rotate {
@@ -290,6 +361,26 @@
         font-size: 0.85rem;
         padding: 0.4rem 0.8rem;
         }
+
+            .article-metadata {
+        padding: 0.8rem 1rem;
+        margin: 0.8rem 0 1.5rem;
+    }
+
+        .author-avatar {
+            width: 35px;
+            height: 35px;
+            border-width: 1.5px;
+        }
+
+        .author-name {
+            font-size: 1rem;
+        }
+
+        .article-date {
+            font-size: 0.85rem;
+        }
     }
     </style>
+
 {% endblock %}

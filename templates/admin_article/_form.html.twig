@@ -1,10 +1,10 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="save-button">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 
 <style>
-    .btn {
+    .save-button {
         background-color: #007bff;
         color: white;
         border: none;
@@ -12,7 +12,7 @@
         cursor: pointer;
         border-radius: 5px;
     }
-    .btn:hover {
+    .save-button:hover {
         background-color: #0056b3;
     }
 </style>
