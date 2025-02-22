@@ -12,8 +12,7 @@
             {% for article in articles %}
                 <div class="article-card">
                     <div class="article-image">
-                        {# Implémenter VichUploaderBundle pour gérer les images #
-                        <img src="{{ asset(article.image) }}" alt="{{ article.title }}">#}
+                    <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.title }}">
                     </div>
                     <div class="article-content">
                         <div class="article-badge">{{ article.category }}</div>
