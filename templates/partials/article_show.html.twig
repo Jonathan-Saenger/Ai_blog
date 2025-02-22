@@ -14,7 +14,7 @@
             <article class="article-card">
                 <div class="article-badge">{{ article.category }}</div>
                 <h1 class="article-title">{{ article.title }}</h1>
-                <p>Article rédigé par : {{ article.author.email }}</p>
+                <p>Article rédigé par : {{ article.author.name }}</p>
 
                 <div class="article-content">
                     {{ article.content | raw }}
