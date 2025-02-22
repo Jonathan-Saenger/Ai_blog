@@ -21,7 +21,7 @@
                         <p>{{ article.getContent() | striptags | slice(0, 200) }}</p>
                         <a href="{{ path('app_article_show', {'id': article.id}) }}" class="read-more">Lire plus</a>
                         {% if app.user %}
-                           <a href="{{ path('app_home', {'id': article.id}) }}" class="read-more">Modifier</a>
+                           <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}" class="read-more">Modifier</a>
                         {% endif %}
                     </div>
                 </div>
