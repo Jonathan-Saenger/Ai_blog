@@ -6,8 +6,6 @@ use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Ehyiah\QuillJsBundle\Form\QuillType;
-use Ehyiah\QuillJsBundle\DTO\QuillGroup;
 
 class ArticleType extends AbstractType
 {
@@ -15,14 +13,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content', QuillType::class, [
-                'quill_extra_options' => [
-                    'height' => '300px',
-                    'theme' => 'snow',
-                    'placeholder' => 'Commencez à écrire...',
-                ],
-                'quill_options' => [QuillGroup::buildWithAllFields()]
-            ]);
+            ->add('content');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
