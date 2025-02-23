@@ -4,226 +4,273 @@
 
 {% block body %}
 <section class="admin-section">
-    <h1 class="admin-title">Modifier l'Article</h1>
+    <div class="admin-container">
+        <header class="page-header">
+            <h1>Modifier l'Article</h1>
+            <div class="header-decoration"></div>
+        </header>
 
-    <div class="admin-card">
-        <div class="form-container">
-            {{ include('admin_article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-        </div>
+        <div class="content-card">
+            {{ form_start(form, {'attr': {'class': 'edit-form'}}) }}
+                <div class="form-fields">
+                    {{ form_widget(form) }}
+                </div>
 
-        <div class="admin-actions">
-            <a href="{{ path('app_admin_article_index') }}" class="back-button">
-                <i class="fas fa-arrow-left"></i> Retour à la liste
-            </a>
+                <div class="button-container">
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            <span>{{ button_label|default('Mettre à jour') }}</span>
+                        </button>
+                        {{ include('admin_article/_delete_form.html.twig') }}
+                    </div>
 
-            {{ include('admin_article/_delete_form.html.twig') }}
+                    <a href="{{ path('app_admin_article_index') }}" class="btn btn-back">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Retour à la liste</span>
+                    </a>
+                </div>
+            {{ form_end(form) }}
         </div>
     </div>
 </section>
 
 <style>
+/* Reset et variables */
+:root {
+    --primary-color: #4361ee;
+    --primary-hover: #3a56d4;
+    --danger-color: #ef476f;
+    --danger-hover: #d63d63;
+    --text-color: #2b2d42;
+    --text-light: #6c757d;
+    --border-color: #e9ecef;
+    --background-light: #f8f9fa;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+}
+
+/* Layout de base */
 .admin-section {
-    padding: 2rem 5%;
-    max-width: 1440px;
-    margin: 2rem auto;
+    min-height: 100vh;
+    background-color: var(--background-light);
+    padding: 2rem 1rem;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* En-tête de page */
+.page-header {
+    margin-bottom: 2.5rem;
     position: relative;
-    z-index: 2;
-    background: linear-gradient(135deg, rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.4));
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(111, 66, 193, 0.1);
-    overflow: hidden;
 }
 
-.admin-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image:
-        radial-gradient(circle at 10% 20%, rgba(0, 123, 255, 0.03) 0%, transparent 20%),
-        radial-gradient(circle at 80% 60%, rgba(111, 66, 193, 0.03) 0%, transparent 20%),
-        radial-gradient(circle at 40% 80%, rgba(232, 62, 140, 0.03) 0%, transparent 20%);
-    opacity: 0.7;
-    z-index: -1;
-}
-
-.admin-title {
-    font-weight: 800;
+.page-header h1 {
     font-size: 2.5rem;
-    background: linear-gradient(45deg, #007bff, #6f42c1, #e83e8c);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    display: inline-block;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 1rem;
 }
 
-.admin-card {
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 12px;
-    padding: 2rem;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(111, 66, 193, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
+.header-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--danger-color));
+    border-radius: 2px;
 }
 
-.admin-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
-}
-
-.form-container {
+/* Carte principale */
+.content-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem;
     margin-bottom: 2rem;
 }
 
-/* Styles pour le formulaire */
-.form-container form div {
+/* Styles du formulaire */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-fields {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-fields > div {
     margin-bottom: 1.5rem;
 }
 
-.form-container label {
+.form-fields label {
     display: block;
+    font-weight: 500;
+    color: var(--text-color);
     margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #495057;
 }
 
-.form-container input[type="text"],
-.form-container textarea,
-.form-container select {
+.form-fields input[type="text"],
+.form-fields textarea,
+.form-fields select {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid rgba(111, 66, 193, 0.2);
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: white;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
-.form-container input[type="text"]:focus,
-.form-container textarea:focus,
-.form-container select:focus {
+.form-fields input[type="text"]:focus,
+.form-fields textarea:focus,
+.form-fields select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
     outline: none;
-    border-color: rgba(0, 123, 255, 0.5);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
-.form-container button[type="submit"] {
-    display: inline-flex;
+/* Conteneur des boutons */
+.button-container {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.5rem;
-    background: linear-gradient(45deg, #007bff, #6f42c1);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
 }
 
-.form-container button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-container button[type="submit"]::after {
-    content: '\f0c7';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    margin-left: 0.5rem;
-}
-
-.admin-actions {
+.action-buttons {
     display: flex;
     gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(111, 66, 193, 0.1);
-    flex-wrap: wrap;
 }
 
-.back-button {
+/* Styles des boutons */
+.btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: transparent;
-    color: #6c757d;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.3s;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
     font-weight: 500;
-    border: 1px solid rgba(108, 117, 125, 0.2);
-}
-
-.back-button:hover {
-    background-color: rgba(108, 117, 125, 0.1);
-    color: #495057;
-    transform: translateX(-3px);
-}
-
-/* Style pour le formulaire de suppression */
-form[name="delete_form"] button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: linear-gradient(45deg, #dc3545, #e83e8c);
-    color: white;
-    border: none;
-    border-radius: 4px;
+    transition: all 0.3s ease;
     cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn i {
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-back {
+    color: var(--text-light);
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+}
+
+.btn-back:hover {
+    background-color: var(--background-light);
+    color: var(--text-color);
+    transform: translateX(-2px);
+}
+
+/* Formulaire de suppression */
+form[name="delete_form"] {
+    margin: 0;
+}
+
+form[name="delete_form"] button {
+    background-color: var(--danger-color);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
     font-weight: 500;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
 }
 
 form[name="delete_form"] button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+    background-color: var(--danger-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
-form[name="delete_form"] button::before {
-    content: '\f2ed';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-}
-
-@media screen and (max-width: 768px) {
+/* Media Queries */
+@media (max-width: 768px) {
     .admin-section {
+        padding: 1rem 0;
+    }
+
+    .content-card {
         padding: 1.5rem;
-        margin: 1rem auto;
+        border-radius: var(--radius-md);
     }
 
-    .admin-card {
-        padding: 1rem;
-    }
-
-    .admin-title {
+    .page-header h1 {
         font-size: 2rem;
     }
 
-    .admin-actions {
+    .button-container {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+
+    .action-buttons {
+        width: 100%;
         flex-direction: column;
     }
 
-    .back-button,
-    form[name="delete_form"] button {
+    .btn {
         width: 100%;
         justify-content: center;
     }
 
-    .form-container button[type="submit"] {
+    .btn-back {
         width: 100%;
+        justify-content: center;
+        margin-bottom: 1rem;
     }
 }
 </style>
