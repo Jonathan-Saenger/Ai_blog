@@ -18,6 +18,7 @@
 </section>
 
 <style>
+
 .presentation {
     padding: 2rem 4%;
     max-width: 1440px;
@@ -30,10 +31,10 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(111, 66, 193, 0.2);
     overflow: hidden;
-}
+  }
 
-/* Grille de fond cyber */
-.presentation::before {
+  /* Grille de fond cyber */
+  .presentation::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -51,10 +52,10 @@
     transform: perspective(1000px) rotateX(60deg);
     opacity: 0.7;
     z-index: -2;
-}
+  }
 
-/* Particules statiques */
-.presentation::after {
+  /* Particules statiques */
+  .presentation::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -86,9 +87,9 @@
         );
     opacity: 0.5;
     z-index: -1;
-}
+  }
 
-.section-title {
+  .section-title {
     font-weight: 800;
     font-size: 2.3rem;
     background: linear-gradient(45deg, #007bff, #6f42c1, #e83e8c);
@@ -99,17 +100,17 @@
     margin-bottom: 0.8rem;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
     letter-spacing: -0.5px;
-}
+  }
 
-.section-intro {
+  .section-intro {
     color: #495057;
     max-width: 85%;
     margin-bottom: 1.5rem;
     line-height: 1.6;
     font-size: 1.05rem;
-}
+  }
 
-.presentation-content {
+  .presentation-content {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 3rem;
@@ -123,10 +124,10 @@
     backdrop-filter: blur(5px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
-}
+  }
 
-/* Effet de brillance sur les bords */
-.presentation-content::before {
+  /* Effet de brillance sur les bords */
+  .presentation-content::before {
     content: '';
     position: absolute;
     top: -2px;
@@ -142,50 +143,50 @@
     z-index: -1;
     opacity: 0;
     transition: opacity 0.3s ease;
-}
+  }
 
-.presentation-content:hover::before {
+  .presentation-content:hover::before {
     opacity: 1;
-}
+  }
 
-.text-content {
+  .text-content {
     padding: 0.8rem;
     position: relative;
-}
+  }
 
-.image-content {
+  .image-content {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0.8rem;
-}
+  }
 
-.portrait-container {
+  .portrait-container {
     position: relative;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 25px rgba(0, 123, 255, 0.2);
     transition: transform 0.3s ease;
-}
+  }
 
-.portrait-container:hover {
+  .portrait-container:hover {
     transform: translateY(-5px);
-}
+  }
 
-.portrait-image {
+  .portrait-image {
     width: 100%;
     max-width: 380px;
     height: auto;
     border-radius: 12px;
     transition: transform 0.5s ease;
     object-fit: cover;
-}
+  }
 
-.portrait-container:hover .portrait-image {
+  .portrait-container:hover .portrait-image {
     transform: scale(1.05);
-}
+  }
 
-.text-content h3 {
+  .text-content h3 {
     font-size: 1.7rem;
     margin: 1.2rem 0;
     background: linear-gradient(45deg, #007bff, #6f42c1);
@@ -194,16 +195,16 @@
     color: transparent;
     display: inline-block;
     letter-spacing: -0.3px;
-}
+  }
 
-.text-content p {
+  .text-content p {
     color: #495057;
     margin: 0.8rem 0;
     line-height: 1.7;
     font-size: 1.02rem;
-}
+  }
 
-.read-more {
+  .read-more {
     display: inline-block;
     margin-top: 1.2rem;
     padding: 0.6rem 1.4rem;
@@ -218,9 +219,9 @@
     overflow: hidden;
     font-size: 0.95rem;
     letter-spacing: 0.3px;
-}
+  }
 
-.read-more::before {
+  .read-more::before {
     content: '';
     position: absolute;
     top: 0;
@@ -230,18 +231,18 @@
     background: linear-gradient(45deg, #0069d9, #5a36a0);
     transition: width 0.3s ease;
     z-index: -1;
-}
+  }
 
-.read-more:hover::before {
+  .read-more:hover::before {
     width: 100%;
-}
+  }
 
-.read-more:hover {
+  .read-more:hover {
     transform: translateX(5px);
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-}
+  }
 
-@media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     .section-intro {
         max-width: 100%;
         font-size: 1rem;
@@ -278,5 +279,6 @@
         transform: perspective(800px) rotateX(60deg);
         background-size: 30px 30px, 30px 30px, 100% 100%;
     }
-}
+  }
+
 </style>

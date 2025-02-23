@@ -250,6 +250,32 @@
     font-style: italic;
 }
 
+.view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.view-all-link:hover {
+  color: #0056b3;
+  background: rgba(0, 123, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.view-all-link i {
+  transition: transform 0.3s;
+}
+
+.view-all-link:hover i {
+  transform: translateX(3px);
+}
+
 @media screen and (max-width: 768px) {
     .admin-section {
         padding: 1.5rem;
