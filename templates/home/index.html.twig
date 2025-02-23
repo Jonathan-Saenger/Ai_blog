@@ -3,8 +3,16 @@
 {% block title %}AI://DevSec Jonathan Saenger{% endblock %}
 
 {% block body %}
-    {% include "partials/_accueil.html.twig" %}
-    {% include "partials/_article.html.twig" %}
-    {% include "partials/_presentation.html.twig" %}
-    {% include "partials/_contact.html.twig" %}
+    <section id="accueil">
+        {% include "partials/_accueil.html.twig" %}
+    </section>
+    <section id="articles">
+        {% include "partials/_article.html.twig" %}
+    </section>
+    <section id="presentation">
+        {% include "partials/_presentation.html.twig" %}
+    </section>
+    <section id="contact">
+        {% include "partials/_contact.html.twig" %}
+    </section>
 {% endblock %}

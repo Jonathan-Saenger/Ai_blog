@@ -1,11 +1,11 @@
 <header>
     <nav>
-        <a href="/" class="logo" data-text="AI://Dev.Sec">AI://Dev.Sec</a>
+        <a href="{{ path('app_home') }}" class="logo" data-text="AI://Dev.Sec">AI://Dev.Sec</a>
         <div class="nav-links">
-            <a href="#accueil" class="cyber-link">Accueil</a>
-            <a href="#articles" class="cyber-link">Articles</a>
-            <a href="#presentation" class="cyber-link">Présentation</a>
-            <a href="#contact" class="cyber-link">Contact</a>
+            <a href="{{ path('app_home') }}#accueil" class="cyber-link" data-section="accueil">Accueil</a>
+            <a href="{{ path('app_home') }}#articles" class="cyber-link" data-section="articles">Articles</a>
+            <a href="{{ path('app_home') }}#presentation" class="cyber-link" data-section="presentation">Présentation</a>
+            <a href="{{ path('app_home') }}#contact" class="cyber-link" data-section="contact">Contact</a>
         </div>
         <button class="burger" aria-label="Menu">
             <span class="burger-line"></span>
@@ -23,10 +23,25 @@
         <span class="burger-line"></span>
     </button>
     <div class="mobile-links">
-        <a href="#accueil" class="cyber-link">Accueil</a>
-        <a href="#articles" class="cyber-link">Articles</a>
-        <a href="#presentation" class="cyber-link">Présentation</a>
-        <a href="#contact" class="cyber-link">Contact</a>
+        <a href="{{ path('app_home') }}#accueil" class="cyber-link" data-section="accueil">Accueil</a>
+        <a href="{{ path('app_home') }}#articles" class="cyber-link" data-section="articles">Articles</a>
+        <a href="{{ path('app_home') }}#presentation" class="cyber-link" data-section="presentation">Présentation</a>
+        <a href="{{ path('app_home') }}#contact" class="cyber-link" data-section="contact">Contact</a>
+    </div>
+</div>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-nav">
+    <button class="mobile-close" aria-label="Fermer le menu">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </button>
+    <div class="mobile-links">
+        <a href="/#accueil" class="cyber-link">Accueil</a>
+        <a href="/#articles" class="cyber-link">Articles</a>
+        <a href="/#presentation" class="cyber-link">Présentation</a>
+        <a href="/#contact" class="cyber-link">Contact</a>
     </div>
 </div>
 
@@ -231,8 +246,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNav = document.querySelector('.mobile-nav');
     const mobileOverlay = document.querySelector('.mobile-overlay');
     const body = document.body;
-    const navLinks = document.querySelectorAll('.mobile-nav .cyber-link');
+    const navLinks = document.querySelectorAll('.cyber-link');
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index';
 
+    // Fonction pour le défilement fluide
+    const smoothScroll = (targetId) => {
+        if (isHomePage) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    };
+
+    // Gestion du menu mobile
     const toggleMenu = () => {
         const isActive = mobileNav.classList.toggle('active');
         mobileOverlay.classList.toggle('active', isActive);
@@ -247,11 +277,45 @@ document.addEventListener('DOMContentLoaded', () => {
         body.style.overflow = '';
     };
 
+    // Gestionnaire d'événements pour les liens de navigation
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (isHomePage) {
+                e.preventDefault();
+                const sectionId = `#${link.dataset.section}`;
+                smoothScroll(sectionId);
+                closeMenu();
+            }
+        });
+    });
+
+    // Event listeners pour le menu mobile
     burger.addEventListener('click', toggleMenu);
     mobileClose.addEventListener('click', closeMenu);
     mobileOverlay.addEventListener('click', closeMenu);
     document.addEventListener('keydown', (e) => e.key === 'Escape' && closeMenu());
-    navLinks.forEach(link => link.addEventListener('click', closeMenu));
-});
 
+    // Gestion du défilement actif
+    if (isHomePage) {
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.dataset.section === sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    }
+});
 </script>
