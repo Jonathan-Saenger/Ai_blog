@@ -33,7 +33,7 @@ class ContactFormService
 
             $email = (new Email())
                 ->from($contact->getEmail())
-                ->to('jonathan.saenger.pro@gmail.com')
+                ->to('mail@aidevsec.jonathansaenger.fr')
                 ->subject($contact->getSubject())
                 ->html(sprintf(
                     '<p><strong>Nom :</strong> %s</p><p><strong>Email :</strong> %s</p><p><strong>Message :</strong> %s</p>',
