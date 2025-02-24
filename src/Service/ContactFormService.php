@@ -32,7 +32,8 @@ class ContactFormService
             $contact = $form->getData();
 
             $email = (new Email())
-                ->from($contact->getEmail())
+                ->from('mail@aidevsec.jonathansaenger.fr')
+                ->replyTo($contact->getEmail())
                 ->to('mail@aidevsec.jonathansaenger.fr')
                 ->subject($contact->getSubject())
                 ->html(sprintf(
