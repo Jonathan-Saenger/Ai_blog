@@ -12,11 +12,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     public function __construct(
-        private ContactFormService $contactFormService
+        private ContactFormService $contactFormService,
+        private ArticleRepository $articleRepository
     ) {}
 
     #[Route('/', name: 'app_home')]
-    public function index(Request $request, ArticleRepository $articleRepository): Response
+    public function index(Request $request): Response
     {
         $form = $this->contactFormService->createContactForm();
 
@@ -26,7 +27,7 @@ final class HomeController extends AbstractController
         }
 
         return $this->render('home/index.html.twig', [
-            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC'], 3),
+            'articles' => $this->articleRepository->findBy([], ['createdAt' => 'DESC'], 3),
             'form' => $form->createView(),
         ]);
     }
